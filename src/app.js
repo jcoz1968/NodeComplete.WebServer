@@ -3,8 +3,13 @@ const express = require('express');
 
 const app = express();
 
+// define paths
+const publicDirectoryPath = app.use(express.static(path.join(__dirname, '../public')));
+const viewsPath = app.use(express.static(path.join(__dirname, '../templates')));
+
+// setup handlebars engine and views location
 app.set('view engine', 'hbs');
-app.use(express.static(path.join(__dirname, '../public')));
+app.set('views', viewsPath);
 
 app.get('/about', (req, res) => {
   res.render('about', {
